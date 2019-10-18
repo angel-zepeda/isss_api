@@ -3,7 +3,7 @@
 const express = require('express');
 const api = express.Router();
 const pensioner1Controller = require('../controllers/pensioner1');
-var multer = require('multer')
+var multer = require('multer');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
+
 multer = multer({ storage });
 
 api.get('/secretaria', pensioner1Controller.index);

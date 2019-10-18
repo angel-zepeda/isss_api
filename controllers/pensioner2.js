@@ -30,7 +30,9 @@ const create = (req, res) => {
     pensioner2.clasificacion = params.clasificacion
     pensioner2.created_at = moment().format('MMMM Do YYYY');
     pensioner2.time = moment().tz("America/Mexico_City").format('HH:mm:ss a');
+
     if (req.files) for (let f of req.files) pensioner2.anexo.push(f.filename);
+
     pensioner2.save((err, pensioner2Store) => {
         if (err) return res.status(500).send({ code: 500, message: 'Error en la peticion' });
         if (!pensioner2Store) return res.status(404).send({ code: 404, message: 'No se pudo guardar' });
