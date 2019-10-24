@@ -30,8 +30,7 @@ const create = (req, res) => {
     pensioner2.clasificacion = params.clasificacion
     pensioner2.created_at = moment().format('MMMM Do YYYY');
     pensioner2.time = moment().tz("America/Mexico_City").format('HH:mm:ss a');
-
-    if (req.files) for (let f of req.files) pensioner2.anexo.push(f.filename);
+    pensioner2.anexo = params.anexo;
 
     pensioner2.save((err, pensioner2Store) => {
         if (err) return res.status(500).send({ code: 500, message: 'Error en la peticion' });
@@ -51,7 +50,7 @@ const deletePensioner2 = (req, res) => {
 const updatePensioner2 = (req, res) => {
     const { id } = req.params;
     const update = req.body;
-    Pensioner2.findByIdAndUpdate(id, update, (err, update) => {
+    Pensioner2.findByIdAndUpdate(id, update, { new: true }, (err, update) => {
         if (err) return res.status(500).send({ code: 500, message: 'Error en la peticion' });
         if (!update) return res.status(404).send({ code: 404, message: 'No se pudo actualizar' });
         return res.status(200).send({ code: 200, message: 'Actulizado correctamente', update });
@@ -60,7 +59,7 @@ const updatePensioner2 = (req, res) => {
 
 const show = (req, res) => {
     const { id } = req.params;
-    Pensioner2.find({ pensioner1: id })
+    Pensioner2.find({ 'pensioner1': id })
         .populate('pensioner1')
         .exec((err, pensioner2) => {
             if (err) return res.status(500).send({ code: 500, message: err });

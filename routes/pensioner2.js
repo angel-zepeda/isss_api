@@ -19,5 +19,7 @@ multer = multer({ storage });
 api.get('/integrador', pensioner2Controller.index);
 api.post('/integrador', multer.array('files', 12), pensioner2Controller.create);
 api.get('/integrador/show/:id', pensioner2Controller.show);
+api.put('/integrador/:id', pensioner2Controller.updatePensioner2);
+api.delete('/integrador/:id', pensioner2Controller.deletePensioner2);
 
 module.exports = api;
