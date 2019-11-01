@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const Pensioner1 = Schema({
     turno: Number,
-    numeroOficio: Number,
+    numeroOficio: String,
     fechaOficio: String,
     numeroCorrespondencia: String,
     fechaRecepcion: String,
