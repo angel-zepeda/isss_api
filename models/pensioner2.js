@@ -14,7 +14,7 @@ const Pensioner2 = Schema({
     envio_juridico: String,
     monto_cheque: Number,
     ajuste_cuota: Number,
-    mes_instalacion: Number,
+    mes_instalacion: String,
     estatus_expediente: String,
     clasificacion: String,
     created_at: String,
