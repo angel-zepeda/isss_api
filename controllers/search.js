@@ -7,9 +7,9 @@ const search = (req, res) => {
     Pensioner1.find({
         $or: [
             { 'promovente': new RegExp(key, 'i') },
-            { 'numeroJuicio': Number.isInteger(key) ? key : Number.isNaN(parseInt(key)) ? 0 : parseInt(key) },
+            { 'numeroJuicio': new RegExp(key, 'i') },
             { 'turno': Number.isInteger(key) ? key : Number.isNaN(parseInt(key)) ? 0 : parseInt(key) },
-            { 'numeroOficio': Number.isInteger(key) ? key : Number.isNaN(parseInt(key)) ? 0 : parseInt(key) }
+            { 'numeroOficio': new RegExp(key, 'i') }
 
         ]
     }).exec((err, find) => {
