@@ -9,7 +9,7 @@ const integrador_routes = require('./routes/pensioner2');
 const search_routes = require('./routes/search');
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '40mb', extended: true }));
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(express.static('files'));
 app.use('/api/v1', [user_routes, secretaria_routes, integrador_routes, search_routes]);
