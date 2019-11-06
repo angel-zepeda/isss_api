@@ -57,6 +57,16 @@ const updatePensioner2 = (req, res) => {
     })
 }
 
+const showAndEdit = (req, res) => {
+    const { id } = req.params;
+    Pensioner2.findById(id)
+        .exec((err, pensioner2) => {
+            if (err) return res.status(500).send({ code: 500, message: err });
+            if (!pensioner2) res.status(404).send({ code: 404, message: 'Not found' });
+            return res.status(200).send({ code: 200, pensioner2 });
+        })
+}
+
 const show = (req, res) => {
     const { id } = req.params;
     Pensioner2.find({ 'pensioner1': id })
@@ -73,5 +83,6 @@ module.exports = {
     create,
     deletePensioner2,
     updatePensioner2,
-    show
+    show,
+    showAndEdit
 }
