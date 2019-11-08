@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const deleteFiles = (req, res) => {
     const { name } = req.params;
-    fs.unlinkSync('/root/Issste/isssteCGapi/files' + name);
+    fs.unlinkSync('/root/Issste/isssteCGapi/files/' + name);
 }
 
 module.exports = {
