@@ -7,11 +7,12 @@ const user_routes = require('./routes/user');
 const secretaria_routes = require('./routes/pensioner1');
 const integrador_routes = require('./routes/pensioner2');
 const search_routes = require('./routes/search');
+const delete_files_routes = require('./routes/files');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ limit: '40mb', extended: true }));
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(express.static('files'));
-app.use('/api/v1', [user_routes, secretaria_routes, integrador_routes, search_routes]);
+app.use('/api/v1', [user_routes, secretaria_routes, integrador_routes, search_routes, delete_files_routes]);
 
 module.exports = app;
