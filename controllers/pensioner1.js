@@ -31,8 +31,8 @@ const create = (req, res) => {
   // if (req.files) for (let f of req.files) pensioner1.anexo.push(f.filename);
 
   pensioner1.save((err, pensioner1Store) => {
-    if (err) return res.status(500).send({ code: 500, message: "Error en la petición: " + err });
-    if (!pensioner1Store) return res.status(404).send({ code: 404, message: "No se pudo registrar los datos" });
+    if (err) return res.send({ code: 500, message: "Error en la petición: " + err });
+    if (!pensioner1Store) return res.send({ code: 404, message: "No se pudo registrar los datos" });
     return res.status(200).send({ code: 200, pensioner1Store });
   })
 }
