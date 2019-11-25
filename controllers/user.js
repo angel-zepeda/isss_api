@@ -15,33 +15,29 @@ function create(req, res) {
   const params = req.body;
   var user = new User();
   user.name = params.name;
-  user.surname = params.surname;
-  user.nick = params.nick;
   user.email = params.email;
   user.role = params.role;
-  user.image = null;
-  User.find({
-    $or: [
-      { email: user.email.toLowerCase() },
-      { nick: user.nick.toLowerCase() }
-    ]
-  }).exec((err, users) => {
-    if (err) return res.status(500).send({ message: "Error en la peticion de usuario" })
-    if (users && users.length >= 1) {
-      return res.status(200).send({
-        message: "Existe un usario registrado con el mismo email"
-      })
-    } else {
-      bcrypt.hash(params.password, null, null, (err, hash) => {
-        user.password = hash;
-        user.save((err, userStore) => {
-          if (err) return res.status(500).send({ message: "Error al guardar el usuario" })
-          if (!userStore) return res.status(404).send({ message: "No se ha registrado el usuario" })
-          return res.status(200).send({ user: userStore });
+  //user.surname = params.surname;
+  //user.nick = params.nick;
+  //user.image = null;
+  User.find({ email: user.email.toLowerCase() })
+    .exec((err, users) => {
+      if (err) return res.status(500).send({ message: "Error en la peticion de usuario" })
+      if (users && users.length >= 1) {
+        return res.status(200).send({
+          message: "Existe un usario registrado con el mismo email"
         })
-      });
-    }
-  });
+      } else {
+        bcrypt.hash(params.password, null, null, (err, hash) => {
+          user.password = hash;
+          user.save((err, userStore) => {
+            if (err) return res.status(500).send({ message: "Error al guardar el usuario" })
+            if (!userStore) return res.status(404).send({ message: "No se ha registrado el usuario" })
+            return res.status(200).send({ user: userStore });
+          })
+        });
+      }
+    });
 }
 
 function loginUser(req, res) {
@@ -53,7 +49,7 @@ function loginUser(req, res) {
         if (check) {
           if (getToken) {
             user.password = undefined;
-            return res.status(200).send({ user: user, token: jwt.createToken(user) });
+            return res.status(200).send({ code: 200, user: user, token: jwt.createToken(user) });
           } else {
             user.password = undefined;
             return res.status(200).send({ code: 200, user });
