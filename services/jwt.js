@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const secret = 'clave_secreta';
 
 // GENERAR TOKEN
-exports.createToken = function (user) {
+exports.createToken = function(user) {
   const payload = {
     sub: user._id,
     name: user.name,
@@ -15,7 +15,9 @@ exports.createToken = function (user) {
     role: user.role,
     image: user.image,
     iat: moment().unix(),
-    exp: moment().add(30, 'days').unix() // expiracion
+    exp: moment()
+      .add(30, 'days')
+      .unix(), // expiracion
   };
-  return jwt.encode(payload, secret)
+  return jwt.encode(payload, secret);
 };

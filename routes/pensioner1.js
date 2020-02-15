@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const api = express.Router();
@@ -6,14 +6,14 @@ const pensioner1Controller = require('../controllers/pensioner1');
 var multer = require('multer');
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'files/')
+  destination: function(req, file, cb) {
+    cb(null, 'files/');
   },
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     // cb(null, Date.now() + file.originalname)
-    cb(null, file.originalname)
-  }
-})
+    cb(null, file.originalname);
+  },
+});
 
 multer = multer({ storage });
 
